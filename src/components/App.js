@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import logo from '../logo.png';
 import './App.css';
 import Web3 from 'web3';
+import DaiTokenMock from '../abis/DaiTokenMock.json'
 
 class App extends Component {
   
@@ -31,6 +32,9 @@ class App extends Component {
     const accounts = await web3.eth.getAccounts()
     this.setState({ account: accounts[0] })
     console.log("account #1", accounts[0])
+
+    const daiTokenAddress = "0x4BBAA009c5dd0A07CDcac11F8ffB87c44Ce84Ad6"
+    const daiTokenMock = new web3.eth.Contract(DaiTokenMock.abi, daiTokenAddress)
 
   }
 
