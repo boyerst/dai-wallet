@@ -34,6 +34,21 @@ class App extends Component {
 
   }
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      // Store account as empty string
+      account: '',
+      // Store daiTokenMock smart contract
+      // Required to be lowercase ⁉️
+      daiTokenMock: null,
+      // Store users' balance
+      balance: 0,
+      // Store their entire transaction history
+        // Can display on clientside
+      transactions: []
+    }
+  }
 
 
   render() {
