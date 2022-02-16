@@ -35,8 +35,8 @@ class App extends Component {
 
     const daiTokenAddress = "0x4BBAA009c5dd0A07CDcac11F8ffB87c44Ce84Ad6"
     const daiTokenMock = new web3.eth.Contract(DaiTokenMock.abi, daiTokenAddress)
-
-  }
+    this.setState({ daiTokenMock: daiTokenMock })
+  } 
 
   constructor(props) {
     super(props);
