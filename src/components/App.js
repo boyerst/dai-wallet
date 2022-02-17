@@ -37,7 +37,7 @@ class App extends Component {
     const daiTokenMock = new web3.eth.Contract(DaiTokenMock.abi, daiTokenAddress)
     this.setState({ daiTokenMock: daiTokenMock })
     const balance = await daiTokenMock.methods.balanceOf(this.state.account).call()
-    console.log(balance.toString())
+    console.log(web3.utils.fromWei(balance.toString()))
     console.log(this.state.daiTokenMock)
   } 
 
