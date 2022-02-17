@@ -41,7 +41,10 @@ class App extends Component {
     const balance = await daiTokenMock.methods.balanceOf(this.state.account).call()
     this.setState({ balance: web3.utils.fromWei(balance.toString(), 'Ether') })
     console.log(web3.utils.fromWei(balance.toString(), 'Ether'))
-    
+    // Fetch transaction history (all outgoing transactions)
+    // "Fetch all 'Transfer' events fromBlock 0 to latest (from entire blockchain), and filter them to only show transactions FROM the connected account"
+    const transactions = await daiTokenMock.getPastEvents('Transfer', { fromBlock: 0, toBlock: 'latest', filter: { from: this.state.account } })
+    console.log(transactions)
     console.log(this.state)
   } 
 
