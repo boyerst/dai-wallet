@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import logo from '../logo.png';
+import daiLogo from '../dai-logo.png';
 import './App.css';
 import Web3 from 'web3';
 import DaiTokenMock from '../abis/DaiTokenMock.json'
@@ -40,10 +40,11 @@ class App extends Component {
 
     const balance = await daiTokenMock.methods.balanceOf(this.state.account).call()
     this.setState({ balance: web3.utils.fromWei(balance.toString(), 'Ether') })
-    console.log(web3.utils.fromWei(balance.toString(), 'Ether'))
+    console.log(web3.utils.fromWei(balance.toString(), 'Ether'), "Ether")
     // Fetch transaction history (all outgoing transactions)
     // "Fetch all 'Transfer' events fromBlock 0 to latest (from entire blockchain), and filter them to only show transactions FROM the connected account"
     const transactions = await daiTokenMock.getPastEvents('Transfer', { fromBlock: 0, toBlock: 'latest', filter: { from: this.state.account } })
+    // Print events
     console.log(transactions)
     console.log(this.state)
   } 
@@ -87,7 +88,7 @@ class App extends Component {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <img src={logo} className="App-logo" alt="logo" />
+                  <img src={daiLogo} className="App-logo" alt="logo" />
                 </a>
                 <h1>Dapp University Starter Kit</h1>
                 <p>
