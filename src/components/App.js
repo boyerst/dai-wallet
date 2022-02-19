@@ -88,9 +88,9 @@ class App extends Component {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <img src={daiLogo} className="App-logo" alt="logo" />
+                  <img src={daiLogo} width="150" />
                 </a>
-                <h1>Dapp University Starter Kit</h1>
+                <h1>{this.state.balance}</h1>
                 <p>
                   Edit <code>src/components/App.js</code> and save to reload.
                 </p>
