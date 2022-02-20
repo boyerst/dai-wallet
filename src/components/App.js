@@ -75,13 +75,19 @@ class App extends Component {
         <div className="container-fluid mt-5">
           <div className="row">
             <main role="main" className="col-lg-12 d-flex text-center">
-              <div className="content mr-auto ml-auto">
+              <div className="content mr-auto ml-auto" style={{ width: "400px" }}>
                 
                 <img src={daiLogo} width="150" />
                 
                 <h1>{this.state.balance} Ether</h1>
                 <form onSubmit={(event) => {
-
+                  // Prevent page from refreshing (the default browser behavior)
+                  event.preventDefault()
+                  // Delare the recipient to grab and send
+                  const recipient = this.recipient.value
+                  // Declare the amount to grab and send
+                  const amount = this.amount.value
+                  console.log(recipient, amount)
                 }}>
                 {/* Specify where the button will lead the user to */}
                 <div className="form-group mr-sm-2">
