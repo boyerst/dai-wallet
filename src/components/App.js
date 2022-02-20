@@ -83,6 +83,25 @@ class App extends Component {
                 <form onSubmit={(event) => {
 
                 }}>
+                {/* Specify where the button will lead the user to */}
+                <div className="form-group mr-sm-2">
+                  <input 
+                    id="recipient" 
+                    type="text"
+                    ref={(input) => { this.recipient = input }}
+                    className="form-control"
+                    placeholder="Recipient Address"
+                    required />
+                </div>
+                <div className="form-group mr-sm-2">
+                  <input 
+                    id="amount" 
+                    type="text"
+                    ref={(input) => { this.amount = input }}
+                    className="form-control"
+                    placeholder="Amount"
+                    required />
+                </div>
 
                 <button type="submit" className="btn btn-primary btn-block">Send</button>
                 </form>
