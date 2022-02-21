@@ -86,7 +86,8 @@ class App extends Component {
                   // Delare the recipient to grab and send
                   const recipient = this.recipient.value
                   // Declare the amount to grab and send
-                  const amount = this.amount.value
+                    // Covert amount to its decimal resolution (18)
+                  const amount = window.web3.utils.toWei(this.amount.value, 'Ether')
                   console.log(recipient, amount)
                 }}>
                 {/* Specify where the button will lead the user to */}
