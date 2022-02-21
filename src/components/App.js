@@ -44,6 +44,7 @@ class App extends Component {
     // Fetch transaction history (all outgoing transactions)
     // "Fetch all 'Transfer' events fromBlock 0 to latest (from entire blockchain), and filter them to only show transactions FROM the connected account"
     const transactions = await daiTokenMock.getPastEvents('Transfer', { fromBlock: 0, toBlock: 'latest', filter: { from: this.state.account } })
+    this.setState({ transactions: transactions })
     // Print events
     console.log(transactions)
     console.log(this.state)
@@ -128,10 +129,28 @@ class App extends Component {
                     placeholder="Amount"
                     required />
                 </div>
-
                 <button type="submit" className="btn btn-primary btn-block">Send</button>
                 </form>
+                <table className="table">
+                  <thead>
+                    <tr>
+                      <th scope="col">Recipient</th>
+                      <th scope="col">Value</th>
+                    </tr>
+                  </thead>
 
+                  <tbody>
+                    { this.state.transactions.map((tx, index) => {
+                      return(
+                        <tr key={index}>
+                          <td>{tx.returnValues.to}</td>
+                          <td>{window.web3.utils.fromWei(tx.returnValues.value.toString(), 'Ether')}</td>
+                        </tr>
+                      )    
+                    })}
+
+                  </tbody>
+                </table>
               </div>
             </main>
           </div>
