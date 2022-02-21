@@ -49,6 +49,16 @@ class App extends Component {
     console.log(this.state)
   } 
 
+  // Pass in both args for the ERC20 function to execute (we grab these from the onSubmit in the form below)
+  transfer(recipient, amount) {
+    // Call the transfer() function from the contract
+    // Pass in the same args
+    // We have to call .send() as well as the function itself
+    // We .send({ from: the account that must sign for this transaction to execute })
+    this.state.daiTokenMock.methods.transfer(recipient, amount).send({ from: this.state.account })
+  }
+
+
   constructor(props) {
     super(props);
     this.state = {
@@ -63,6 +73,13 @@ class App extends Component {
         // Can display on clientside
       transactions: []
     }
+    // In JavaScript, class methods are not bound by default - Therefore, it’s necessary to bind functions to the class instance
+      // We bind the transfer function to our 'class App extends Component' in our constructor method
+      // Because the binding() line of code is inside the constructor, "this" is an instance of the class itself
+      // Thus when transfer() is called in the DOM, our app still knows what "this" should be
+    // The bind() method allows us to easily set which object will be bound by the "this" keyword when a function or method is invoked
+    // We put it in the constructor because
+    this.transfer = this.transfer.bind(this)
   }
 
 
@@ -79,7 +96,7 @@ class App extends Component {
                 
                 <img src={daiLogo} width="150" />
                 
-                <h1>{this.state.balance} Ether</h1>
+                <h1>{this.state.balance} DAI</h1>
                 <form onSubmit={(event) => {
                   // Prevent page from refreshing (the default browser behavior)
                   event.preventDefault()
@@ -88,6 +105,8 @@ class App extends Component {
                   // Declare the amount to grab and send
                     // Covert amount to its decimal resolution (18)
                   const amount = window.web3.utils.toWei(this.amount.value, 'Ether')
+                  // Call the transfer function inside of the transfer function
+                  this.transfer(recipient, amount)
                   console.log(recipient, amount)
                 }}>
                 {/* Specify where the button will lead the user to */}
